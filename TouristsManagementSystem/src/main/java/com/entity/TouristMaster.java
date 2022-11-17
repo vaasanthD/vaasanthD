@@ -7,7 +7,7 @@ import javax.persistence.*;
 @Table(name = "Tourist_Master")
 public class TouristMaster {
 	@Id
-	@GeneratedValue(strategy = GenerationType.TABLE)
+	//@GeneratedValue(strategy = GenerationType.TABLE)
 	@Column(name = "Tourist_Id")
 	private Integer id;
 
@@ -21,9 +21,10 @@ public class TouristMaster {
 	private String date;
 
 	@Column(name = "Booking_Amount")
-	private Float bookingAmount;
+	private Double bookingAmount;
 
-	@OneToMany(mappedBy = "touristMaster", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@OneToMany(targetEntity=TouristContact.class,cascade=CascadeType.ALL)  
+	@JoinColumn(name = "Tourist_Id", referencedColumnName="Tourist_Id")
 	private List<TouristContact> contacts = new ArrayList<>();
 
 	public TouristMaster(List<TouristContact> contacts) {
@@ -71,11 +72,11 @@ public class TouristMaster {
 		this.date = date;
 	}
     
-	public Float getBookingAmount() {
+	public Double getBookingAmount() {
 		return bookingAmount;
 	}
 
-	public void setBookingAmount(Float bookingAmount) {
+	public void setBookingAmount(Double bookingAmount) {
 		this.bookingAmount = bookingAmount;
 	}
 

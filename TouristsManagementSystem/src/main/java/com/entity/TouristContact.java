@@ -9,19 +9,20 @@ public class TouristContact{
 	@Id
 	@Column(name = "Phone_Number")
 	private String phoneNumber;
-	
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "Tourist_id")
-	private TouristMaster tourist;
+	@Column(name = "Tourist_Id")
+	private Integer id;
+	//@ManyToOne(fetch = FetchType.LAZY)
+	//@JoinColumn(name = "Tourist_id")
+	//private TouristMaster tourist;
 	
 	public TouristContact() {
 		super();
 	}
 	
-	public TouristContact(String phoneNumber,TouristMaster tourist) {
+	public TouristContact(String phoneNumber,Integer id) {
 		super();
 		this.phoneNumber = phoneNumber;
-		this.tourist = tourist;
+		this.id = id;
 	}
 
 	public String getPhoneNumber() {
@@ -32,17 +33,17 @@ public class TouristContact{
 		this.phoneNumber = phoneNumber;
 	}
 
-	public TouristMaster getTourist() {
-		return tourist;
+	public Integer getId() {
+		return id;
 	}
 
-	public void setTourist(TouristMaster tourist) {
-		this.tourist = tourist;
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	@Override
 	public String toString() {
-		return "TouristContact [phoneNumber=" + phoneNumber + ", tourist=" + tourist + "]";
+		return "TouristContact [phoneNumber=" + phoneNumber + ", id=" + id + "]";
 	}
 	
 	
