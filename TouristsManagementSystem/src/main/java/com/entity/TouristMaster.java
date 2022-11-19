@@ -7,7 +7,8 @@ import javax.persistence.*;
 @Table(name = "Tourist_Master")
 public class TouristMaster {
 	@Id
-	//@GeneratedValue(strategy = GenerationType.TABLE)
+	@GeneratedValue(generator="generate",strategy = GenerationType.SEQUENCE)
+	@SequenceGenerator(name="generate",initialValue=1,allocationSize=1)
 	@Column(name = "Tourist_Id")
 	private Integer id;
 
@@ -23,15 +24,27 @@ public class TouristMaster {
 	@Column(name = "Booking_Amount")
 	private Double bookingAmount;
 
-	@OneToMany(targetEntity=TouristContact.class,cascade=CascadeType.ALL)  
-	@JoinColumn(name = "Tourist_Id", referencedColumnName="Tourist_Id")
+	@OneToMany(mappedBy="tourist")  
 	private List<TouristContact> contacts = new ArrayList<>();
-
-	public TouristMaster(List<TouristContact> contacts) {
-		super();
-		this.contacts = contacts;
+	
+    
+	public void addContacts(TouristContact contactNumbers) {
+		contacts.add(contactNumbers);
+		contactNumbers.setTourist(this); 
 	}
+	public TouristMaster() {
+		super();
+	}
+	
+	
 
+	public TouristMaster(String name, String address, String date, Double bookingAmount) {
+		super();
+		this.name = name;
+		this.address = address;
+		this.date = date;
+		this.bookingAmount = bookingAmount;
+	}
 	public List<TouristContact> getContacts() {
 		return contacts;
 	}
@@ -40,11 +53,11 @@ public class TouristMaster {
 		this.contacts = contacts;
 	}
 
-	public int getId() {
+	public Integer getId() {
 		return id;
 	}
 
-	public void setId(int id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 
@@ -80,11 +93,11 @@ public class TouristMaster {
 		this.bookingAmount = bookingAmount;
 	}
 
-	@Override
+	/*@Override
 	public String toString() {
 		return "TouristMaster [id=" + id + ", name=" + name + ", address=" + address + ", date=" + date
 				+ ", bookingAmount=" + bookingAmount + ", contacts=" + contacts + "]";
-	}
+	}*/
 
 	
     

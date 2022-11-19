@@ -11,7 +11,7 @@ public class ContactService {
 	@Autowired
 	private ContactRepository contactRepo;
 	
-	public void addPhoneNumber(TouristContact touristContact) {
+	public void addNumber(TouristContact touristContact) {
 		contactRepo.save(touristContact);
 	}
 }

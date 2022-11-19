@@ -1,6 +1,5 @@
 package com.entity;
 
-
 import javax.persistence.*;
 
 @Entity
@@ -9,20 +8,18 @@ public class TouristContact{
 	@Id
 	@Column(name = "Phone_Number")
 	private String phoneNumber;
-	@Column(name = "Tourist_Id")
-	private Integer id;
-	//@ManyToOne(fetch = FetchType.LAZY)
-	//@JoinColumn(name = "Tourist_id")
-	//private TouristMaster tourist;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "tourist_id")
+	private TouristMaster  tourist;
 	
 	public TouristContact() {
 		super();
 	}
 	
-	public TouristContact(String phoneNumber,Integer id) {
+	public TouristContact(String phoneNumber,TouristMaster  tourist) {
 		super();
 		this.phoneNumber = phoneNumber;
-		this.id = id;
+		this.tourist = tourist;
 	}
 
 	public String getPhoneNumber() {
@@ -33,19 +30,17 @@ public class TouristContact{
 		this.phoneNumber = phoneNumber;
 	}
 
-	public Integer getId() {
-		return id;
+	public TouristMaster getTourist() {
+		return tourist;
 	}
 
-	public void setId(Integer id) {
-		this.id = id;
+	public void setTourist(TouristMaster tourist) {
+		this.tourist = tourist;
 	}
 
 	@Override
 	public String toString() {
-		return "TouristContact [phoneNumber=" + phoneNumber + ", id=" + id + "]";
-	}
-	
-	
+		return "TouristContact [phoneNumber=" + phoneNumber + ", tourist=" + tourist + "]";
+	}	
 	
 }
